@@ -21,7 +21,7 @@ class CarModel(models.Model):
         return f"{self.make} - {self.name}"
 
 
-class Sale(models.Model):
+class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(
