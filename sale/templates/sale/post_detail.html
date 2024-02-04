@@ -10,8 +10,14 @@
       <div class="col-md-6 masthead-text">
         <!-- Post title goes in these h1 tags -->
         <h1 class="post-title">{{ post.title }}</h1>
+        <!-- Post model and price go under title -->
+        <p class="post-subtitle">{{ post.car_model }} : {{ post.price }} €</p>
+        <!-- Post production year -->
+        <p class="post-subtitle">Production year: {{ post.production_year }}</p>
         <!-- Post author goes before the | the post's created date goes after -->
-        <p class="post-subtitle">{{ post.author }} | {{ post.created_on }}</p>
+        <p class="post-subtitle">
+          Posted by: {{ post.author }} on {{ post.created_on }}
+        </p>
       </div>
       <div class="d-none d-md-block col-md-6 masthead-image">
         <img
