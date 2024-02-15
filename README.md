@@ -1,8 +1,8 @@
 Code Institute Project 4
 
 Unfinished:
--add "new sale post" for authenticated users
--add edit and delete for posts
--testing
--ReadMe
--store images on Cloudinary
+1. add "new sale post" for authenticated users
+2. add edit and delete for posts
+3. testing
+4. Update ReadMe
+5. store images on Cloudinary
