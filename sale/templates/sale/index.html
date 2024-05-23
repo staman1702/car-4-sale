@@ -6,8 +6,9 @@
     <!-- Blog Entries Column -->
     <div class="col-12 mt-3 left">
       <div class="row">
-        {% for post in post_list %}
-        <div class="col-md-4">
+        {% for post in posts %}
+        {% if request.user.is_superuser or request.user == post.author or post.status == 1 %}
+        <div class="col-md-4 {% if post.status == 0 %}fade-me{% endif %}">        
           <div class="card mb-4">
             <div class="card-body">
               <div class="image-container">
@@ -28,7 +29,7 @@
         </div>
         {% if forloop.counter|divisibleby:3 %}
       </div>
-      <div class="row">{% endif %} {% endfor %}</div>
+      <div class="row">{% endif %} {% endif %} {% endfor %}</div>
     </div>
   </div>
   {% if is_paginated %}
