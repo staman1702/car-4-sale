@@ -3,7 +3,7 @@ from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .models import Post, Comment
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
 
 # Create your views here.
 
@@ -103,3 +103,23 @@ def comment_delete(request, slug, comment_id):
                              'You can only delete your own comments!')
 
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+def add_post(request):
+    """
+    View to add a new post.
+    """
+    if request.method == "POST":
+        form = PostForm(request.POST, user=request.user)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            messages.success(request, 'Post created successfully!')
+            return HttpResponseRedirect(reverse('post_detail', args=[post.slug]))
+        else:
+            messages.error(request, 'Error creating post!')
+    else:
+        form = PostForm(user=request.user)
+
+    return render(request, 'sale/add_post.html', {'form': form})

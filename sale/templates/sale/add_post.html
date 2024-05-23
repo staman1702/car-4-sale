@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+<!-- block content -->
+{% block content %}
+<!-- load static -->
+{% load static %}
+<!-- load crispy forms tags -->
+{% load crispy_forms_tags %}
+
+{% if user.is_authenticated %}
+<div class="masthead">
+    <div class="container">
+        <div class="row g-0">
+            <div class="col-md-6 masthead-text">
+                <h1 class="post-title">Fill out the form bellow to post your Sale!</h1>
+                <p class="post-subtitle">
+                    Posting as: {{ user.username }}
+                </p>
+            </div>
+            <div class="d-none d-md-block col-md-6 masthead-image">
+                <img src="{% static 'images/default.jpg' %}" class="scale" alt="placeholder" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <h3>Sale form:</h3>
+        <form id="commentForm" method="post" style="margin-top: 1.3em">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <button id="submitButton" type="submit" class="btn btn-signup btn-lg">
+                Submit
+            </button>
+        </form>
+    </div>
+</div>
+{% else %}
+<div class="masthead">
+    <div class="container">
+        <div class="row g-0">
+            <div class="col-md-6 masthead-text">
+                <h1 class="post-title">Sorry. You have to log in to post your sale.</h1>
+            </div>
+            <div class="d-none d-md-block col-md-6 masthead-image">
+                <img src="{% static 'images/default.jpg' %}" class="scale" alt="placeholder" />
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
