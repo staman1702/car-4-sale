@@ -6,7 +6,7 @@
 <!-- load crispy forms tags -->
 {% load crispy_forms_tags %}
 
-{% if user.is_authenticated %}
+{% if request.user.is_superuser or request.user == post.author  %}
 <div class="masthead">
     <div class="container">
         <div class="row g-0">
@@ -40,7 +40,7 @@
     <div class="container">
         <div class="row g-0">
             <div class="col-md-6 masthead-text">
-                <h1 class="post-title">Sorry. You have to log in to edit your sale.</h1>
+                <h1 class="post-title">Sorry. This action is not allowed.</h1>
             </div>
             <div class="d-none d-md-block col-md-6 masthead-image">
                 <img src="{% static 'images/default.jpg' %}" class="scale" alt="placeholder" />
