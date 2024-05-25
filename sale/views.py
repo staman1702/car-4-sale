@@ -3,7 +3,7 @@ from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .models import Post, Comment
-from .forms import CommentForm, PostForm
+from .forms import CommentForm, PostForm, PostAdminForm
 
 # Create your views here.
 
@@ -30,7 +30,7 @@ def post_detail(request, slug):
     :template:`sale/post_detail.html`
     """
 
-    queryset = Post.objects.filter(status=1)
+    queryset = Post.objects.all()
     post = get_object_or_404(queryset, slug=slug)
     comments = post.comments.all().order_by("-created_on")
     comment_count = post.comments.filter(approved=True).count()
@@ -124,3 +124,31 @@ def add_post(request):
         form = PostForm(user=request.user)
 
     return render(request, 'sale/add_post.html', {'form': form})
+
+
+def edit_post(request, slug):
+    """
+    View to edit an existing post.
+    """
+    post = get_object_or_404(Post, slug=slug)
+
+    if request.method == "POST":
+        if request.user.is_superuser:
+            form = PostAdminForm(request.POST, instance=post, user=request.user)
+        else:
+            form = PostForm(request.POST, instance=post, user=request.user)
+        if form.is_valid():
+            edited_post = form.save(commit=False)
+            edited_post.author = request.user
+            edited_post.save()
+            messages.success(request, 'Post updated successfully!')
+            return HttpResponseRedirect(reverse('post_detail', args=[post.slug]))
+        else:
+            messages.error(request, 'Error updating post!')
+    else:
+        if request.user.is_superuser:
+            form = PostAdminForm(instance=post, user=request.user)
+        else:
+            form = PostForm(instance=post, user=request.user)
+
+    return render(request, 'sale/edit_post.html', {'form': form, 'post': post})

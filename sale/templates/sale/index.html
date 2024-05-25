@@ -3,16 +3,19 @@
 <!-- index.html content starts here -->
 <div class="container-fluid">
   <div class="row">
+    <div class="text-end me-3">
+      <a href="{% url 'add_post' %}" class="btn btn-add">Add Sale</a>
+    </div>
     <!-- Blog Entries Column -->
-    <div class="col-12 mt-3 left">
+    <div class="col-12 mt-3 left">      
       <div class="row">
         {% for post in posts %}
         {% if request.user.is_superuser or request.user == post.author or post.status == 1 %}
         <div class="col-md-4 {% if post.status == 0 %}fade-me{% endif %}">        
           <div class="card mb-4">
             <div class="card-body">
-              <div class="image-container">
-                <div class="image-flash">
+              <div class="seller-container">
+                <div class="seller-flash">
                   <p class="author">Seller: {{ post.author }}</p>
                 </div>
               </div>

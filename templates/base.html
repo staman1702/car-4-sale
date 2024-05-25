@@ -34,15 +34,11 @@
 </head>
 
 <body class="d-flex flex-column h-100 main-bg">
-  <!-- Navigation -->
+  <!-- Page logo -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid">
       <a class="navbar-brand" href="{% url 'home' %}"><span class="brand">A<span class="red-o">u</span>to<span
             class="thin">|HUB</span></span></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
@@ -71,7 +67,6 @@
         </ul>
         <span class="navbar-text text-muted"> project portfolio IV </span>
       </div>
-    </div>
   </nav>
   <!-- displaying Django messages -->
   <div class="container">
@@ -89,13 +84,11 @@
   </div>
   <main class="flex-shrink-0 main-bg">
     {% if user.is_authenticated %}
-    <div class="d-flex justify-content-between align-items-center m-3">      
-      <a href="{% url 'add_post' %}" class="btn btn-primary">Add Sale</a>
-      <p class="text-end mb-0">You are logged in as {{ user }}</p>
-    </div>
+    <p class="text-end m-3">You are logged in as {{ user }}</p>
     {% else %}
     <p class="text-end m-3">You are not logged in</p>
-    {% endif %} {% block content %}
+    {% endif %}
+    {% block content %}
     <!-- Content Goes here -->
     {% endblock content %}
   </main>

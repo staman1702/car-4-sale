@@ -34,11 +34,11 @@ body {
     background-color: transparent;
 }
 
-.image-container {
+.seller-container {
     position: relative;
 }
 
-.image-flash {
+.seller-flash {
     position: absolute;
     bottom: 5%;
     min-width: 30%;
@@ -112,15 +112,18 @@ body {
 }
 
 .btn-signup,
+.btn-add,
 .btn-edit {
     background-color: #188181;
     color: #fff;
 }
 
 .btn-signup:hover,
+.btn-add:hover,
 .btn-signup:active {
     background-color: #fff;
     color: #23BBBB;
+    border-color: #23BBBB;
 }
 
 .link {
@@ -163,3 +166,13 @@ body {
 .fade-me {
     opacity: 0.5;
 }
+
+.post-title-wrapper {
+    display: flex;
+    align-items: baseline;
+  }
+  
+.post-title-wrapper .post-subtitle {
+    margin-left: 10px;
+  }
+

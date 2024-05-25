@@ -51,10 +51,10 @@ class Post(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["created_on"]
+        ordering = ["-created_on"]
 
     def save(self, *args, **kwargs):
-        if not self.slug:
+        if not self.slug or 'title' in kwargs.get('update_fields', []):
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 

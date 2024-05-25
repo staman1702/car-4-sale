@@ -17,3 +17,12 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'car_model', 'production_year', 'price', 'content', 'excerpt']
+
+class PostAdminForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(PostAdminForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = Post
+        fields = ['title', 'car_model', 'production_year', 'price', 'status', 'content', 'excerpt']
