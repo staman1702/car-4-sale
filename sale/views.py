@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -152,3 +152,19 @@ def edit_post(request, slug):
             form = PostForm(instance=post, user=request.user)
 
     return render(request, 'sale/edit_post.html', {'form': form, 'post': post})
+
+
+def delete_post(request, slug):
+    """
+    View to delete a post.
+    """
+    post = get_object_or_404(Post, slug=slug)
+
+    if not request.user.is_superuser and request.user != post.author:
+        messages.error(request, 'Sorry, only sales post creator/site admin can do that.')
+        return redirect('post_detail', slug=slug)
+    
+    post.delete()
+    messages.success(request, 'Sales post deleted!')
+
+    return redirect('home')
