@@ -1,19 +1,25 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.db.models import Q
 from .models import Post, Comment
 from .forms import CommentForm, PostForm, PostAdminForm
 
 # Create your views here.
 
 
-class PostList(generic.ListView):
-    # model = Post
-    queryset = Post.objects.all()
+class PostList(LoginRequiredMixin, generic.ListView):
+    model = Post    
     template_name = "sale/index.html"
     context_object_name = "posts"
     paginate_by = 6
+    def get_queryset(self):
+        return Post.objects.filter(
+            Q(author=self.request.user) | Q(status=1)
+        )
+    
 
 
 def post_detail(request, slug):
