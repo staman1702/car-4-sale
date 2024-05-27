@@ -140,8 +140,7 @@ def edit_post(request, slug):
         else:
             form = PostForm(request.POST, instance=post, user=request.user)
         if form.is_valid():
-            edited_post = form.save(commit=False)
-            edited_post.author = request.user
+            edited_post = form.save(commit=False)            
             edited_post.save()
             messages.success(request, 'Post updated successfully!')
             return HttpResponseRedirect(reverse('post_detail', args=[post.slug]))
