@@ -16,9 +16,13 @@ class PostList(LoginRequiredMixin, generic.ListView):
     context_object_name = "posts"
     paginate_by = 6
     def get_queryset(self):
-        return Post.objects.filter(
-            Q(author=self.request.user) | Q(status=1)
-        )
+        user = self.request.user
+        if user.is_superuser:
+            return Post.objects.all()
+        else:
+            return Post.objects.filter(
+                Q(author=user) | Q(status=1)
+            )
     
 
 
