@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 from .models import Post, Comment
-from .forms import CommentForm, PostForm, PostAdminForm
+from .forms import CommentForm, CommentAdminForm, PostForm, PostAdminForm
 
 # Create your views here.
 
@@ -23,18 +23,6 @@ class PostList(LoginRequiredMixin, generic.ListView):
 
 
 def post_detail(request, slug):
-    """
-    Display an individual :model:`sale.Post`.
-
-    **Context**
-
-    ``post``
-        An instance of :model:`sale.Post`.
-
-    **Template:**
-
-    :template:`sale/post_detail.html`
-    """
 
     queryset = Post.objects.all()
     post = get_object_or_404(queryset, slug=slug)
@@ -42,8 +30,10 @@ def post_detail(request, slug):
     comment_count = post.comments.filter(approved=True).count()
 
     if request.method == "POST":
-        print("Received a POST request")
-        comment_form = CommentForm(data=request.POST)
+        if request.user.is_superuser:
+            comment_form = CommentAdminForm(data=request.POST)
+        else:
+            comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.author = request.user
@@ -54,10 +44,11 @@ def post_detail(request, slug):
                 request, messages.SUCCESS,
                 'Comment submitted and awaiting approval'
             )
-
-    comment_form = CommentForm()
-    print("About to render template")
-
+    if request.user.is_superuser:
+        comment_form = CommentAdminForm()
+    else:
+        comment_form = CommentForm()
+    
     return render(
         request,
         "sale/post_detail.html",
@@ -71,25 +62,26 @@ def post_detail(request, slug):
 
 
 def comment_edit(request, slug, comment_id):
-    """
-    view to edit comments
-    """
+    
     if request.method == "POST":
-
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, slug=slug)
         comment = get_object_or_404(Comment, pk=comment_id)
-        comment_form = CommentForm(data=request.POST, instance=comment)
+        if request.user.is_superuser:
+            comment_form = CommentAdminForm(data=request.POST, instance=comment)
+        else:
+            comment_form = CommentForm(data=request.POST, instance=comment)
 
-        if comment_form.is_valid() and comment.author == request.user:
+        if comment_form.is_valid() and (comment.author == request.user or request.user.is_superuser):
             comment = comment_form.save(commit=False)
             comment.post = post
-            comment.approved = False
+            if not request.user.is_superuser:
+                comment.approved = False
             comment.save()
             messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
+        
         else:
-            messages.add_message(request, messages.ERROR,
-                                 'Error updating comment!')
+            messages.add_message(request, messages.ERROR, 'Error updating comment!')
 
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
@@ -102,7 +94,7 @@ def comment_delete(request, slug, comment_id):
     post = get_object_or_404(queryset, slug=slug)
     comment = get_object_or_404(Comment, pk=comment_id)
 
-    if comment.author == request.user:
+    if comment.author == request.user or request.user.is_superuser:
         comment.delete()
         messages.add_message(request, messages.SUCCESS, 'Comment deleted!')
     else:

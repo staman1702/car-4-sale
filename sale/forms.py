@@ -8,6 +8,10 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('body',)
 
+class CommentAdminForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('body', 'approved')
 
 class PostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
