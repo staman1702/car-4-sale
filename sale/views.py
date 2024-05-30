@@ -113,7 +113,7 @@ def add_post(request):
     View to add a new post.
     """
     if request.method == "POST":
-        form = PostForm(request.POST, user=request.user)
+        form = PostForm(request.POST, request.FILES, user=request.user)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
@@ -136,9 +136,9 @@ def edit_post(request, slug):
 
     if request.method == "POST":
         if request.user.is_superuser:
-            form = PostAdminForm(request.POST, instance=post, user=request.user)
+            form = PostAdminForm(request.POST, request.FILES, instance=post, user=request.user)
         else:
-            form = PostForm(request.POST, instance=post, user=request.user)
+            form = PostForm(request.POST, request.FILES, instance=post, user=request.user)
         if form.is_valid():
             edited_post = form.save(commit=False)            
             edited_post.save()

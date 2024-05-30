@@ -20,7 +20,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['title', 'car_model', 'production_year', 'price', 'content', 'excerpt']
+        fields = ['title', 'car_model', 'production_year', 'price', 'featured_image', 'content', 'excerpt']
 
 class PostAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -29,4 +29,4 @@ class PostAdminForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['title', 'car_model', 'production_year', 'price', 'status', 'content', 'excerpt']
+        fields = ['title', 'car_model', 'production_year', 'price', 'featured_image', 'status', 'content', 'excerpt']
