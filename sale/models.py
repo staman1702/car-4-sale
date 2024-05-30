@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 import datetime
 
 
@@ -37,6 +38,7 @@ class Post(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="sale_posts"
     )
+    featured_image = CloudinaryField('image', default='placeholder')
     car_model = models.ForeignKey(CarModel, on_delete=models.CASCADE)
     production_year = models.IntegerField(
         choices=YEAR_CHOICES,
