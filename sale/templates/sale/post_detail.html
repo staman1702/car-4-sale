@@ -1,27 +1,20 @@
 {% extends 'base.html' %}
-<!-- block content -->
 {% block content %}
-<!-- load static -->
 {% load static %}
-<!-- load crispy forms tags -->
 {% load crispy_forms_tags %}
 
 <div class="masthead">
   <div class="container">
     <div class="row g-0">
       <div class="col-md-6 masthead-text">
-        <!-- Post title goes in these h1 tags -->
         <div class="post-title-wrapper">
           <h1 class="post-title">{{ post.title }}</h1>
           {% if post.status == 0 %}
           <a class="post-subtitle text-warning" href="{% url 'edit_post' post.slug %}"> (unpublished sales post)</a>
           {% endif %}
         </div>
-        <!-- Post model and price go under title -->
         <p class="post-subtitle">{{ post.car_model }} : {{ post.price }} €</p>
-        <!-- Post production year -->
         <p class="post-subtitle">Production year: {{ post.production_year }}</p>
-        <!-- Post author goes before the | the post's created date goes after -->
         <p class="post-subtitle">
           Posted by: {{ post.author }} on {{ post.created_on }}
         </p>
@@ -49,13 +42,10 @@
   <div class="row">
     <div class="col card mb-4 mt-3 left top">
       <div class="card-body">
-        <!-- The post content goes inside the card-text. -->
-        <!-- Use the | safe filter inside the template tags -->
         <p class="card-text">{{ post.content | safe }}</p>
       </div>
     </div>
   </div>
-  <!-- Displaying count of comments -->
   <div class="row">
     <div class="col-12">
       <strong class="text-secondary">
@@ -66,7 +56,6 @@
       <hr />
     </div>
   </div>
-  <!-- Displaying Comments -->
   {% if post.status == 0 %}
   <div class="row">
     <div class="col-md-8 card mb-4 mt-3">
@@ -118,7 +107,7 @@
           <button id="submitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
         </form>
         {% else %}
-        <p>Log in to leave a comment</p>
+        <p><a class="link" href="{% url 'account_login' %}">Log in</a> to leave a comment</p>
         {% endif %}
       </div>
     </div>
@@ -126,7 +115,7 @@
   {% endif %}
 </div>
 
-<!-- Delete confirmation modal -->
+
 <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

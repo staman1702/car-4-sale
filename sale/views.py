@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -7,23 +7,24 @@ from django.db.models import Q
 from .models import Post, Comment
 from .forms import CommentForm, CommentAdminForm, PostForm, PostAdminForm
 
-# Create your views here.
 
 
-class PostList(LoginRequiredMixin, generic.ListView):
+class PostList(generic.ListView):
     model = Post    
     template_name = "sale/index.html"
     context_object_name = "posts"
     paginate_by = 6
     def get_queryset(self):
         user = self.request.user
-        if user.is_superuser:
-            return Post.objects.all()
+        if user.is_authenticated:
+            if user.is_superuser:
+                return Post.objects.all()
+            else:
+                return Post.objects.filter(
+                    Q(author=user) | Q(status=1)
+                )
         else:
-            return Post.objects.filter(
-                Q(author=user) | Q(status=1)
-            )
-    
+            return Post.objects.filter(status=1)
 
 
 def post_detail(request, slug):
@@ -34,20 +35,25 @@ def post_detail(request, slug):
     comment_count = post.comments.filter(approved=True).count()
 
     if request.method == "POST":
-        if request.user.is_superuser:
-            comment_form = CommentAdminForm(data=request.POST)
-        else:
-            comment_form = CommentForm(data=request.POST)
-        if comment_form.is_valid():
-            comment = comment_form.save(commit=False)
-            comment.author = request.user
-            comment.post = post
-            comment.save()
+        if request.user.is_authenticated:
+            if request.user.is_superuser:
+                comment_form = CommentAdminForm(data=request.POST)
+            else:
+                comment_form = CommentForm(data=request.POST)
+            if comment_form.is_valid():
+                comment = comment_form.save(commit=False)
+                comment.author = request.user
+                comment.post = post
+                comment.save()
 
-            messages.add_message(
-                request, messages.SUCCESS,
-                'Comment submitted and awaiting approval'
-            )
+                messages.add_message(
+                    request, messages.SUCCESS,
+                    'Comment submitted and awaiting approval'
+                )
+        else:
+            messages.error(request, 'You need to be logged in to post comments.')
+            return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+        
     if request.user.is_superuser:
         comment_form = CommentAdminForm()
     else:
@@ -65,6 +71,7 @@ def post_detail(request, slug):
     )
 
 
+@login_required
 def comment_edit(request, slug, comment_id):
     
     if request.method == "POST":
@@ -90,6 +97,7 @@ def comment_edit(request, slug, comment_id):
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
+@login_required
 def comment_delete(request, slug, comment_id):
     """
     view to delete comment
@@ -108,6 +116,7 @@ def comment_delete(request, slug, comment_id):
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
+@login_required
 def add_post(request):
     """
     View to add a new post.
@@ -128,6 +137,7 @@ def add_post(request):
     return render(request, 'sale/add_post.html', {'form': form})
 
 
+@login_required
 def edit_post(request, slug):
     """
     View to edit an existing post.
@@ -155,6 +165,7 @@ def edit_post(request, slug):
     return render(request, 'sale/edit_post.html', {'form': form, 'post': post})
 
 
+@login_required
 def delete_post(request, slug):
     """
     View to delete a post.

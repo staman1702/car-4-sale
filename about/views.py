@@ -2,14 +2,10 @@ from django.shortcuts import render
 from django.contrib import messages
 from .models import About
 from .forms import CollaborateForm
-# Create your views here.
+
 
 
 def about_me(request):
-    """
-    Renders the About page
-    """
-
     if request.method == "POST":
         collaborate_form = CollaborateForm(data=request.POST)
         if collaborate_form.is_valid():

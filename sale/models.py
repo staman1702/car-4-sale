@@ -29,7 +29,7 @@ class CarModel(models.Model):
 
     class Meta:
         unique_together = ['make', 'name']
-        ordering = ['make__name', 'name']  # Order by 'make' and then by 'name'
+        ordering = ['make__name', 'name']
 
 
 class Post(models.Model):
