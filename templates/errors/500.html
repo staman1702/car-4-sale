@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container text-center my-5">
+    <h1 class="display-4">Server Error</h1>
+    <p class="lead">Sorry, but something went wrong on our end. Please try again later.</p>
+    <a class="btn btn-primary" href="{% url 'home' %}">Go to Home</a>
+</div>
+{% endblock %}

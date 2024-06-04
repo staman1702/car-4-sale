@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container text-center my-5">
+    <h1 class="display-4">Method Not Allowed</h1>
+    <p class="lead">Sorry, but the method you tried to use is not allowed on this page.</p>
+    <a class="btn btn-primary" href="{% url 'home' %}">Go to Home</a>
+</div>
+{% endblock %}
