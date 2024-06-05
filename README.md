@@ -1,5 +1,167 @@
 # Code Institute Portfolio Project 4
 
+## Table of contents:
+Theme, Epic and User Stories
+
+Design and UX
+- Wireframes
+- Database model
+
+Features
+
+Future Features
+
+Technologies
+
+Testing
+
+Debugging and known bugs
+
+Deployment
+
+Resources
+
+Credits
+
+Acknowledgements
+
+Name: AutoHUB Exchange
+
+Live link: https://pp4-django-project-ci-2fe170b1dfd9.herokuapp.com/
+
+# Theme, Epic and User Stories
+
+# Design and UX
+## Wireframes
+## Database model
+
+# Features
+
+# Future Features
+
+- **Like and Dislike Buttons for Comments:**
+  Implement functionality to allow users to express their opinions on comments by adding Like and Dislike buttons. This feature will enhance user engagement and provide valuable feedback on the quality of comments.
+
+# Technologies
+
+Languages used:
+- Python
+- HTML5
+- CSS
+- Javascript
+
+Frameworks, Libraries and Programs Used:
+- Django/allauth (Python framework)
+- Bootstrap 4
+- Cloudinary -(hosting the images)
+- PostgreSQL (database)
+- GitHub (for hosting the site)
+- Heroku (deployment of the site)
+- Visual Studio Code (editing the files)
+
+# Testing
+
+## General
+Regular testing was conducted throughout the course of this project, especially before commits to Github.
+
+Responsive/Mobile-first design was tested using Chrome developer tools to ensure desired layout was achieved. As well as Chrome, and Firefox which successfully affirmed my project's responsiveness. To test responsiveness, the following mobiles were tested Galaxy S8+, Pixel 7, iPhone 14 Pro Max, iPad Pro. All successfully passed in mobile responsiveness of the page.
+
+## Validator Testing
+- Html was Validated using the [HTML Validator](https://validator.w3.org/).
+- CSS was Validated using the [CSS Validator](https://jigsaw.w3.org/css-validator/).
+- Python Validation was performed installing flake8 (command : pip install flake8) and using it (command : python -m flake8). No serious errors reported.
+
+## Manual User Story Testing
+
+- As a user, I want to view a paginated list of sale posts - Pass
+- As a user, I want to view individual sale post details - Pass
+- As a user, I want to view individual sale post comments - Pass
+- As a user, I want to register for an account - Pass
+- As a user, I want to login/logout - Pass
+- As a user, I want to add a sales post - Pass
+- As a user, I want to edit/update my sales posts - Pass
+- As a user, I want to delete my sales posts - Pass
+- As a user, I want to add a comment - Pass
+- As a user, I want to edit/update my  comments - Pass
+- As a user, I want to delete my comments - Pass
+
+- As a site owner, I want to view a paginated list of sale posts, including the not published posts - Pass
+- As a site owner, I want to view individual sale post details, including the not published posts - Pass
+- As a site owner, I want to view individual sale post comments, including the not approved comments - Pass
+- As a site owner, I want to edit/update/change status of all of the sites posts - Pass
+- As a site owner, I want to edit/update/approve all of the sites comments - Pass
+- As a site owner, I want to delete of any of the sites sale posts - Pass
+- As a site owner, I want to delete any of the comments - Pass
+
+## Unit Testing
+During the development of the project, I have written several unit tests for my forms and views to ensure their correctness and functionality. These tests are located in the following files:
+- `sale/test_forms.py`
+- `sale/test_views.py`
+- `about/test_forms.py`
+- `about/test_views.py`
+
+To run the unit tests, navigate to your project directory in the terminal and execute the following command:
+    ```bash
+    python manage.py test
+    ```
+This command will run all the unit tests and provide the results. I'm pleased to report that all 23 unit tests have passed successfully.
+
+# Debugging and known bugs
+
+### Known Issues
+
+#### Post Model - Car Make and Model Selection
+
+**Issue Description:**
+Initially, the desired functionality was to allow users to first choose the car's Make and then, depending on the selected Make, choose the Model of the car they are selling. However, Django does not natively support this feature in crispy forms, which made the implementation challenging.
+
+**Original Approach:**
+- The initial plan was to have the Make as a foreign key in the Post model.
+- This would allow the Make to dynamically filter the available Models.
+
+**Implemented Approach:**
+- Due to the limitation in Django crispy forms, the approach was adjusted.
+- Instead of using Make as a foreign key in the Post model, the Make was used as a foreign key in the Model.
+- The Model was then used as a foreign key in the Post model.
+
+**Steps to Reproduce the Issue:**
+1. Attempt to create a form where the Model choices dynamically update based on the selected Make using Django crispy forms.
+2. Observe that Django crispy forms do not support this functionality out-of-the-box.
+
+**Expected Behavior:**
+Users should be able to select a car Make, and based on that selection, the available car Models should be dynamically filtered and displayed.
+
+**Impact:**
+This limitation affects the user experience when using bigger database. Scrolling through numerous models to find the desired one might be exhausting for users.
+
+**Workaround:**
+By structuring the models such that:
+- `Make` is a foreign key in the `Model` model.
+- `Model` is then used as a foreign key in the `Post` model.
+
+This setup ensures the relationship is maintained, albeit without the dynamic form behavior initially desired. The impact of this issue is minimized if the website focuses on the sale of only certain car makes (e.g., Japanese cars).
+
+#### Updating Comments as Site Owner
+
+**Bug Description:**
+When editing comments as the Site Owner, the form does not prepopulate the "Approved" checkbox field. This issue means that even if a comment was previously approved, the checkbox appears unchecked when editing the comment. This can lead to accidental unapproval of comments if the checkbox is not manually checked again during the editing process.
+
+**Steps to Reproduce:**
+1. Log in as the Site Owner.
+2. Navigate to the comments section.
+3. Select a comment that has already been approved.
+4. Click on the "Edit" button for the selected comment.
+5. Observe that the "Approved" checkbox is not prepopulated (unchecked).
+
+**Expected Behavior:**
+The "Approved" checkbox should be prepopulated based on the current approval status of the comment. If the comment is already approved, the checkbox should be checked when the edit form loads.
+
+**Impact:**
+This bug can cause confusion and extra work for the Site Owner, as they must manually check the "Approved" box again for comments that were already approved. This may lead to unintentional unapproval of comments, affecting site content management.
+
+**Workaround:**
+Ensure that the "Approved" checkbox is checked manually when editing any comment that should remain approved.
+
 # Deployment
 
 ## A. Setting Up Cloud Environments
