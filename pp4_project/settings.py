@@ -110,10 +110,6 @@ CSRF_TRUSTED_ORIGINS = [
     "https://*.herokuapp.com"
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "https://ui.dev",
-]
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
