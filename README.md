@@ -64,18 +64,27 @@ As a site owner, I want to:
 
 ## Wireframes
 Home page
+
 ![home_page](static/images/readme_images/wireframe_1.png)
 
+
 Sale Post detail
+
 ![sale_post_details](static/images/readme_images/wireframe_2.png)
 
+
 New Sale Post form
+
 ![new_sale_post_form](static/images/readme_images/wireframe_4.png)
 
+
 About page
+
 ![about_page](static/images/readme_images/wireframe_3.png)
 
+
 Sign Up page
+
 ![sign_up](static/images/readme_images/wireframe_5.png)
 
 
