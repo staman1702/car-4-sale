@@ -8,12 +8,12 @@ from .models import Post, Comment
 from .forms import CommentForm, CommentAdminForm, PostForm, PostAdminForm
 
 
-
 class PostList(generic.ListView):
-    model = Post    
+    model = Post
     template_name = "sale/index.html"
     context_object_name = "posts"
     paginate_by = 6
+
     def get_queryset(self):
         user = self.request.user
         if user.is_authenticated:
@@ -53,12 +53,12 @@ def post_detail(request, slug):
         else:
             messages.error(request, 'You need to be logged in to post comments.')
             return HttpResponseRedirect(reverse('post_detail', args=[slug]))
-        
+
     if request.user.is_superuser:
         comment_form = CommentAdminForm()
     else:
         comment_form = CommentForm()
-    
+
     return render(
         request,
         "sale/post_detail.html",
@@ -73,7 +73,7 @@ def post_detail(request, slug):
 
 @login_required
 def comment_edit(request, slug, comment_id):
-    
+
     if request.method == "POST":
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, slug=slug)
@@ -90,7 +90,7 @@ def comment_edit(request, slug, comment_id):
                 comment.approved = False
             comment.save()
             messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
-        
+
         else:
             messages.add_message(request, messages.ERROR, 'Error updating comment!')
 
@@ -150,7 +150,7 @@ def edit_post(request, slug):
         else:
             form = PostForm(request.POST, request.FILES, instance=post, user=request.user)
         if form.is_valid():
-            edited_post = form.save(commit=False)            
+            edited_post = form.save(commit=False)
             edited_post.save()
             messages.success(request, 'Post updated successfully!')
             return HttpResponseRedirect(reverse('post_detail', args=[post.slug]))
@@ -175,7 +175,7 @@ def delete_post(request, slug):
     if not request.user.is_superuser and request.user != post.author:
         messages.error(request, 'Sorry, only sales post creator/site admin can do that.')
         return redirect('post_detail', slug=slug)
-    
+
     post.delete()
     messages.success(request, 'Sales post deleted!')
 

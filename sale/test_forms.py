@@ -20,7 +20,7 @@ class TestCommentForm(TestCase):
             content='This is a test post content.',
             status=1
         )
-        
+
         self.comment = Comment.objects.create(
             post=self.post,
             author=self.user,
@@ -43,6 +43,7 @@ class TestCommentForm(TestCase):
         self.assertEqual(updated_comment.body, 'Updated comment', msg='Comment body should be updated')
         self.assertFalse(updated_comment.approved, msg='Comment should be marked as waiting for approvall')
 
+
 class TestCommentAdminForm(TestCase):
 
     def setUp(self):
@@ -59,7 +60,7 @@ class TestCommentAdminForm(TestCase):
             content='This is a test post content.',
             status=1
         )
-        
+
         self.comment = Comment.objects.create(
             post=self.post,
             author=self.user,
@@ -155,7 +156,6 @@ class TestPostForm(TestCase):
         self.assertEqual(updated_post.title, 'Updated Post', msg='Post title should be updated')
         self.assertEqual(updated_post.content, 'This is an updated test post content.', msg='Post content should be updated')
         self.assertEqual(updated_post.excerpt, 'Updated post excerpt', msg='Post excerpt should be updated')
-
 
 
 class TestPostAdminForm(TestCase):

@@ -4,6 +4,7 @@ from django.test import TestCase
 from .forms import CommentForm
 from .models import Post, CarMake, CarModel
 
+
 class TestPostViews(TestCase):
 
     def setUp(self):
@@ -39,4 +40,4 @@ class TestPostViews(TestCase):
         post_data = {'body': 'This is a test comment.'}
         response = self.client.post(reverse('post_detail', args=['test-post']), post_data)
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Comment submitted and awaiting approval',response.content)
+        self.assertIn(b'Comment submitted and awaiting approval', response.content)

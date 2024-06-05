@@ -4,7 +4,6 @@ from .models import About
 from .forms import CollaborateForm
 
 
-
 def about_me(request):
     if request.method == "POST":
         collaborate_form = CollaborateForm(data=request.POST)

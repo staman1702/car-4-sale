@@ -7,10 +7,12 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('body',)
 
+
 class CommentAdminForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('body', 'approved')
+
 
 class PostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -20,6 +22,7 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'car_model', 'production_year', 'price', 'featured_image', 'content', 'excerpt']
+
 
 class PostAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
