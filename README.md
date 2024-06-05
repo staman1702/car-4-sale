@@ -1,6 +1,6 @@
-Code Institute Portfolio Project 4
+# Code Institute Portfolio Project 4
 
-# Deployment Write-up
+# Deployment
 
 ## A. Setting Up Cloud Environments
 
@@ -151,3 +151,22 @@ Code Institute Portfolio Project 4
 - Ensure all changes are thoroughly tested and reviewed before merging into the `main` branch to maintain site stability.
 
 By following these steps, you can maintain and update the site efficiently, ensuring that all necessary information is readily available for anyone who takes over the project in the future.
+
+# Resources
+
+- [Django 4.2 documentation](https://docs.djangoproject.com/en/4.2/)
+- [Bootstrap 4 documentation](https://getbootstrap.com/docs/4.6/getting-started/introduction/)
+- [Cloudinary documentation](https://cloudinary.com/documentation)
+- ERD made with [Lucidchart](https://lucid.app/)
+- Wireframes made with MockFlow [WireframePro](https://wireframepro.mockflow.com/)
+
+# Credits
+
+## Content
+- Content was created and assessed by Matija Stankovic
+
+## Media
+- Images used in development are all from [Pexels](https://www.pexels.com/)
+
+## Acknowledgements
+- Completion of an app and it's features would not have been possible without the support and advice of my mentor Brian Macharia
