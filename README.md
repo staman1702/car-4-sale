@@ -30,17 +30,67 @@ Name: AutoHUB Exchange
 Live link: https://pp4-django-project-ci-2fe170b1dfd9.herokuapp.com/
 
 # Theme, Epic and User Stories
+### Theme
+The theme of our web page is an online marketplace that facilitates the buying and selling of used cars. Our platform aims to provide users with a convenient and efficient way to browse, buy, and sell pre-owned vehicles.
+
+### Epic
+The epic for our web page involves creating a comprehensive online marketplace for used cars. This encompasses building user-friendly interfaces for browsing listings, uploading vehicles for sale, and engaging in online discussions via comments. Key features of the epic include user authentication, enabling users to post their own sales listings, and fostering interaction through comment sections.
+
+### User Stories
+As a user, I want to:
+- view a paginated list of sale posts 
+- view individual sale post details
+- view individual sale post comments
+- register for an account
+- login/logout
+- add a sales post
+- edit/update my sales posts 
+- delete my sales posts
+- add a comment
+- edit/update my comments
+- delete my comments
+- send Site Owner collaboration request
+
+As a site owner, I want to:
+- view a paginated list of sale posts, including the not published posts
+- view individual sale post details, including the not published posts
+- view individual sale post comments, including the not approved comments
+- edit/update/change status of all of the sites posts
+- edit/update/approve all of the sites comments
+- delete of any of the sites sale posts
+- delete any of the comments
 
 # Design and UX
+
 ## Wireframes
+Home page
+![home_page](static/images/readme_images/wireframe_1.png)
+
+Sale Post detail
+![sale_post_details](static/images/readme_images/wireframe_2.png)
+
+New Sale Post form
+![new_sale_post_form](static/images/readme_images/wireframe_4.png)
+
+About page
+![about_page](static/images/readme_images/wireframe_3.png)
+
+Sign Up page
+![sign_up](static/images/readme_images/wireframe_5.png)
+
+
 ## Database model
+![erd](static/images/readme_images/erd.png)
 
 # Features
 
 # Future Features
 
 - **Like and Dislike Buttons for Comments:**
-  Implement functionality to allow users to express their opinions on comments by adding Like and Dislike buttons. This feature will enhance user engagement and provide valuable feedback on the quality of comments.
+Implement functionality to allow users to express their opinions on comments by adding Like and Dislike buttons. This feature will enhance user engagement and provide valuable feedback on the quality of comments.
+
+- **Viewing the Site Owner collaboration requests:**
+As a Site Owner, I want the ability to review collaboration requests without logging into the Django Admin panel.
 
 # Technologies
 
@@ -82,7 +132,7 @@ Responsive/Mobile-first design was tested using Chrome developer tools to ensure
 - As a user, I want to edit/update my sales posts - Pass
 - As a user, I want to delete my sales posts - Pass
 - As a user, I want to add a comment - Pass
-- As a user, I want to edit/update my  comments - Pass
+- As a user, I want to edit/update my comments - Pass
 - As a user, I want to delete my comments - Pass
 
 - As a site owner, I want to view a paginated list of sale posts, including the not published posts - Pass
