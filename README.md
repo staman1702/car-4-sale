@@ -55,9 +55,9 @@ As a site owner, I want to:
 - view a paginated list of sale posts, including the not published posts
 - view individual sale post details, including the not published posts
 - view individual sale post comments, including the not approved comments
-- edit/update/change status of all of the sites posts
-- edit/update/approve all of the sites comments
-- delete of any of the sites sale posts
+- edit/update/change status of all the sites posts
+- edit/update/approve all the site's comments
+- delete of any of the site's sale posts
 - delete any of the comments
 
 # Design and UX
@@ -439,5 +439,5 @@ By following these steps, you can maintain and update the site efficiently, ensu
 ## Media
 - Images used in development are all from [Pexels](https://www.pexels.com/)
 
-## Acknowledgements
+## Acknowledgments
 - Completion of an app and it's features would not have been possible without the support and advice of my mentor Brian Macharia
