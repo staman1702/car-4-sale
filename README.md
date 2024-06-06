@@ -102,34 +102,42 @@ Navbar:
 
 
 Index page in Mobile view:
+
 ![smaller_viewport](static/images/readme_images/smaller_viewport.png)
 
 
 Also navbar in Mobile view with dropdown menu:
+
 ![navbar_small](static/images/readme_images/navbar_small.png)
 
 
 Post details & comments section:
+
 ![detail_&_comments](static/images/readme_images/detail_&_comments.png)
 
 
 Sign up form:
+
 ![sign_up](static/images/readme_images/sign_up.png)
 
 
 Login:
+
 ![login](static/images/readme_images/login.png)
 
 
 Logout:
+
 ![logout](static/images/readme_images/logout.png)
 
 
 Collaboration request form:
+
 ![collaboration_request](static/images/readme_images/collaboration_request.png)
 
 
 About page:
+
 ![about](static/images/readme_images/about.png)
 
 
