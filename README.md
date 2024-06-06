@@ -61,6 +61,7 @@ As a site owner, I want to:
 - delete any of the comments
 
 # Design and UX
+The design of my webpage prioritizes user experience and accessibility. I've carefully crafted a visually appealing interface that enhances usability and navigation. By using a combination of dark text on a light background for key elements such as the navbar, footer, and landing page, I've created a striking yet easy-to-read layout. This choice ensures that users can seamlessly interact with the content without any visual strain, whether they're browsing listings, engaging in discussions, or exploring the site's features. Additionally, I've maintained consistency throughout the website by incorporating a unified color scheme, with dark and light options, to create a cohesive and polished look across all pages. With a focus on user-centric design principles, I aim to provide an immersive and enjoyable experience for all visitors to my platform.
 
 ## Wireframes
 Home page
@@ -92,6 +93,38 @@ Sign Up page
 ![erd](static/images/readme_images/erd.png)
 
 # Features
+
+Index page:
+![index_page](static/images/readme_images/index.png)
+
+Navbar:
+![navbar](static/images/readme_images/navbar.png)
+
+
+Index page in Mobile view:
+![smaller_viewport](static/images/readme_images/smaller_viewport.png)
+
+Also navbar in Mobile view with dropdown menu:
+![navbar_small](static/images/readme_images/navbar_small.png)
+
+Post details & comments section:
+![detail_&_comments](static/images/readme_images/detail_&_comments.png)
+
+Sign up form:
+![sign_up](static/images/readme_images/sign_up.png)
+
+Login:
+![login](static/images/readme_images/login.png)
+
+Logout:
+![logout](static/images/readme_images/logout.png)
+
+Collaboration request form:
+![collaboration_request](static/images/readme_images/collaboration_request.png)
+
+About page:
+![about](static/images/readme_images/about.png)
+
 
 # Future Features
 
@@ -143,6 +176,7 @@ Responsive/Mobile-first design was tested using Chrome developer tools to ensure
 - As a user, I want to add a comment - Pass
 - As a user, I want to edit/update my comments - Pass
 - As a user, I want to delete my comments - Pass
+- As a user, I want to send Site Owner collaboration request - Pass
 
 - As a site owner, I want to view a paginated list of sale posts, including the not published posts - Pass
 - As a site owner, I want to view individual sale post details, including the not published posts - Pass
